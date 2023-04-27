@@ -45,6 +45,7 @@ from galois.collection import Collection
 ## 🏈 Gameplan
 
 * Implementing CRUD (Create, Read, Update, Delete) operations for JSON documents and collections ✅
+* Implement a unique id generator similar to MongoDB ✅
 * Design custom query language to search and filter documents based on their properties 🔄 
 * Implement query language using Abstract Syntax Trees (AST) 📭
 * Implement custom storage engine based on LSMTrees 📭
