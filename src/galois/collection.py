@@ -52,7 +52,7 @@ class Collection:
     def __str__(self):
         return f"Collection({self.name})"
 
-    def insert_one(self, document: dict):
+    def _insert(self, document: dict):
         """
         Insert a document into the collection and write it to the filesystem.
         generate a unique id for the document.
@@ -68,6 +68,23 @@ class Collection:
             file.write(json.dumps(document))
 
         self.documents[document_id] = f"{self.path}/{document_id}.json"
+
+    def _update(self, document_id: str, new_document: dict):
+        """
+        Update a document in the collection and write it to the filesystem.
+        Raises an exception if the document does not exist.
+
+        Args:
+            document_id (str): The id of the document to update.
+            new_document (dict): The new document to replace the old one with.
+        """
+
+        if document_id not in self.documents:
+            raise Exception(f"Document with id '{document_id}' does not exist.")
+
+        new_document["_id"] = document_id
+        with open(self.documents[document_id], "w+") as file:
+            file.write(json.dumps(new_document))
 
     def __generate_document_id(self) -> str:
         """
