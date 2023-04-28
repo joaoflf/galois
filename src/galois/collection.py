@@ -32,14 +32,6 @@ class Collection:
         self.current_process = os.getpid()
         self.id_process_counter = os.urandom(3)
 
-    @lru_cache(maxsize=128)
-    def __getitem__(self, key):
-        """
-        Read a document from the collection from the filesystem, using lru_cache to cache the result.
-        """
-        with open(self.documents[key], "r") as file:
-            return json.loads(file.read())
-
     def __iter__(self):
         return iter(self.documents)
 
@@ -52,7 +44,25 @@ class Collection:
     def __str__(self):
         return f"Collection({self.name})"
 
-    def _insert(self, document: dict):
+    def _get_document(self, document_id: str):
+        """
+        Get a document from the collection.
+        Raises an exception if the document does not exist.
+
+        Args:
+            document_id (str): The id of the document to get.
+
+        Returns:
+            dict: The document.
+        """
+
+        if document_id not in self.documents:
+            raise Exception(f"Document with id '{document_id}' does not exist.")
+
+        with open(self.documents[document_id], "r") as file:
+            return json.loads(file.read())
+
+    def _insert_document(self, document: dict):
         """
         Insert a document into the collection and write it to the filesystem.
         generate a unique id for the document.
@@ -61,7 +71,7 @@ class Collection:
             document (dict): The document to insert.
         """
 
-        document_id = self.__generate_document_id()
+        document_id = self._generate_document_id()
         document["_id"] = document_id
 
         with open(f"{self.path}/{document_id}.json", "w") as file:
@@ -69,7 +79,7 @@ class Collection:
 
         self.documents[document_id] = f"{self.path}/{document_id}.json"
 
-    def _update(self, document_id: str, new_document: dict):
+    def _update_document(self, document_id: str, new_document: dict):
         """
         Update a document in the collection and write it to the filesystem.
         Raises an exception if the document does not exist.
@@ -86,7 +96,22 @@ class Collection:
         with open(self.documents[document_id], "w+") as file:
             file.write(json.dumps(new_document))
 
-    def __generate_document_id(self) -> str:
+    def _delete_document(self, document_id: str):
+        """
+        Delete a document from the collection.
+        Raises an exception if the document does not exist.
+
+        Args:
+            document_id (str): The id of the document to delete.
+        """
+
+        if document_id not in self.documents:
+            raise Exception(f"Document with id '{document_id}' does not exist.")
+
+        os.remove(self.documents[document_id])
+        del self.documents[document_id]
+
+    def _generate_document_id(self) -> str:
         """
         Generate a unique ID similar to MongoDB ObjectId, consisting of 4-byte timestamp,
         5-byte random value, and 3-byte incrementing counter.

@@ -17,3 +17,7 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/joaoflf/galois"
 "Bug Tracker" = "https://github.com/joaoflf/galois/issues"
+
+[project.optional-dependencies]
+tests = ["pytest"]
+lint = ["black"]

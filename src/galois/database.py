@@ -75,6 +75,9 @@ class Database:
         Args:
             name (str): The name of the collection to delete.
         """
+        if self.get_collection(name) is None:
+            raise Exception(f"Collection '{name}' does not exist.")
+
         for collection in self.collections:
             if collection.name == name:
                 self.collections.remove(collection)
