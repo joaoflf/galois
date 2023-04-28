@@ -19,5 +19,5 @@ classifiers = [
 "Bug Tracker" = "https://github.com/joaoflf/galois/issues"
 
 [project.optional-dependencies]
-tests = ["pytest"]
+test = ["pytest"]
 lint = ["black"]
