@@ -1,6 +1,11 @@
 <div align="center">
     <img alt="Galois Logo" src="./assets/galois.png" alt="Logo" width="400">
-    
+</div>
+<div align="center">
+    <img alt="python badge" src="https://img.shields.io/badge/python-3.10-blue.svg">
+    <img alt="build badge" src="https://github.com/joaoflf/galois/actions/workflows/build.yml/badge.svg">
+    </br></br>
+
 A **simple document store** that can store, retrieve, and query JSON documents using a custom query language.
 
 [🎯 Features](#-features) •
