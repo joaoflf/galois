@@ -11,6 +11,7 @@ A **simple document store** that can store, retrieve, and query JSON documents u
 [🎯 Features](#-features) •
 [⚙️ Installation](#️-installation) •
 [⚡️ Quickstart](#️-quickstart) •
+[🔤 Query Language](#-query-language) •
 [🤖 Benchmarks](#-benchmarks) •
 [🏈 Gameplan](#-gameplan)
 
@@ -24,7 +25,8 @@ This project is part of the application of my learnings from chapters 2 and 3 of
 * Data store supporting collections of JSON documents
 * CRUD operations for collections and JSON documents
 * Custom query language to search and filter documents based on their properties **(Coming Soon)**
-* Custom storage engine based on LSM Trees **(Coming Soon)**
+* Custom storage engine based on LSM Trees **(Coming Soon)*
+ 
 
 ## ⚙️ Installation
 
@@ -35,7 +37,7 @@ git clone git@github.com:joaoflf/galois.git
 cd galois 
 pip install .
 ```
-
+`
 ## ⚡️ Quickstart
 
 ```python
@@ -44,6 +46,44 @@ from galois.collection import Collection
 
 # more to come
 ```
+
+## 🔤 Query Language
+A simple, yet powerful, language designed to query JSON documents. The syntax is inspired by Lisp and offers logical `AND`, `OR`, and `NOT` operations, as well as comparison operators `=`, `<`, and `>`.
+
+### Logical Expressions
+Logical expressions are used to combine other expressions with a logical operator: AND, OR, or NOT.
+
+The syntax is as follows:
+```
+(OPERATOR EXPRESSION1 EXPRESSION2 ...)
+````
+
+Example:
+```
+(AND (OR name=John name=Jane) age=30)
+```
+
+### Comparison Expressions
+Comparison expressions are used to compare a field in the document with a value.
+
+The syntax is as follows:
+```
+field OPERATOR value
+```
+
+Example:
+```
+age>30
+```
+
+### Semantics
+
+* `AND`: All of the expressions must be true.
+* `OR`: At least one of the expressions must be true.
+* `NOT`: The expression must be false.
+* `=`: The field in the document must equal the value.
+* `<`: The field in the document must be less than the value.
+* `>`: The field in the document must be greater than the value.
 
 ## 🤖 Benchmarks
 
