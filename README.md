@@ -18,6 +18,8 @@ A **simple document store** that can store, retrieve, and query JSON documents u
 
 </div>
 
+&nbsp;
+
 ## 🎯 Features
 
 This project is part of the application of my learnings from chapters 2 and 3 of the  book [Designing Data-Intensive Applications](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/):
@@ -25,8 +27,9 @@ This project is part of the application of my learnings from chapters 2 and 3 of
 * Data store supporting collections of JSON documents
 * CRUD operations for collections and JSON documents
 * Custom query language to search and filter documents based on their properties **(Coming Soon)**
-* Custom storage engine based on LSM Trees **(Coming Soon)*
+* Custom storage engine based on LSM Trees **(Coming Soon)**  
  
+&nbsp;
 
 ## ⚙️ Installation
 
@@ -37,7 +40,9 @@ git clone git@github.com:joaoflf/galois.git
 cd galois 
 pip install .
 ```
-`
+
+&nbsp;
+
 ## ⚡️ Quickstart
 
 ```python
@@ -46,6 +51,8 @@ from galois.collection import Collection
 
 # more to come
 ```
+
+&nbsp;
 
 ## 🔤 Query Language
 A simple, yet powerful, language designed to query JSON documents. The syntax is inspired by Lisp and offers logical `AND`, `OR`, and `NOT` operations, as well as comparison operators `=`, `<`, and `>`.
@@ -85,7 +92,11 @@ age>30
 * `<`: The field in the document must be less than the value.
 * `>`: The field in the document must be greater than the value.
 
+&nbsp;
+
 ## 🤖 Benchmarks
+
+&nbsp;
 
 ## 🏈 Gameplan
 
