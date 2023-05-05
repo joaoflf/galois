@@ -11,28 +11,36 @@ class Node:
 
 def parse(query: str) -> Node:
     """Parse a query string into an AST."""
-    valid_operators = ["AND", "OR", "NOT", "=", "<", ">"]
+    logical_operators = ["AND", "OR", "NOT"]
+    comparison_operators = ["<", ">", "="]
+    # find all ( and ) and add spaces around them
+    query = re.sub(r"([()])", r" \1 ", query)
     tokens = query.split()
 
     def parse_expression(index) -> tuple[Node, int]:
         token = tokens[index]
-        if token == "(":
+
+        if token[0] == "(":
             operator = tokens[index + 1]
-            if operator not in valid_operators:
-                raise Exception(f"Invalid operator '{operator}'")
+            if operator not in logical_operators:
+                raise Exception(f"Invalid logical operator '{operator}'")
+
             index += 2
             children = []
             while tokens[index] != ")":
                 child, index = parse_expression(index)
                 children.append(child)
+
             if len(children) == 0:
                 raise Exception("Empty expression after logical operator")
+
             return Node(operator, children), index + 1
+
         else:
-            match = re.match(r"([a-zA-Z0-9]+)([<>=])([a-zA-Z0-9]+)", token)
+            match = re.match(r"([a-zA-Z0-9]+)([<>=])([a-zA-Z0-9)]+)", token)
             if match:
                 field, operator, value = match.groups()
-                if operator in valid_operators:
+                if operator in comparison_operators:
                     return (
                         Node(
                             operator,
