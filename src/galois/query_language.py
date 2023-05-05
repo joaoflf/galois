@@ -1,9 +1,10 @@
 import re
 from dataclasses import dataclass, field
+from typing import List
 
 
 class Node:
-    def __init__(self, type: str, children: list["Node"] = [], value=None):
+    def __init__(self, type: str, children: List["Node"] = [], value=None):
         self.type = type
         self.children = children
         self.value = value
