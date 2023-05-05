@@ -1,6 +1,6 @@
 import re
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Tuple
 
 
 class Node:
@@ -18,7 +18,7 @@ def parse(query: str) -> Node:
     query = re.sub(r"([()])", r" \1 ", query)
     tokens = query.split()
 
-    def parse_expression(index) -> tuple[Node, int]:
+    def parse_expression(index) -> Tuple[Node, int]:
         token = tokens[index]
 
         if token[0] == "(":
