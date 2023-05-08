@@ -55,3 +55,21 @@ def parse(query: str) -> Node:
                 raise Exception(f"Invalid token '{token}'")
 
     return parse_expression(0)[0]
+
+
+def evaluate(node: Node, data: dict) -> bool:
+    """Evaluate an AST against a data dictionary."""
+    if node.type == "AND":
+        return all(evaluate(child, data) for child in node.children)
+    elif node.type == "OR":
+        return any(evaluate(child, data) for child in node.children)
+    elif node.type == "NOT":
+        return not evaluate(node.children[0], data)
+    elif node.type == "<":
+        return data[node.children[0].value] < node.children[1].value
+    elif node.type == ">":
+        return data[node.children[0].value] > node.children[1].value
+    elif node.type == "=":
+        return data[node.children[0].value] == node.children[1].value
+    else:
+        raise Exception(f"Invalid node type '{node.type}'")
