@@ -10,7 +10,7 @@ def test_collection():
     db = Database(db_name)
     collection = db.create_collection("test_collection")
     yield collection
-    shutil.rmtree(f"database/{db_name}")
+    shutil.rmtree(f"storage/{db_name}")
 
 
 def test_insert_document(test_collection):
