@@ -1,5 +1,5 @@
 import os
-
+from typing import Optional
 from galois.collection import Collection
 
 
@@ -13,12 +13,17 @@ class Database:
 
     def __init__(self, name: str):
         self.name = name
-        self.path = f"database/{name}"
+        self.path = f"storage/{name}"
         self.collections = []
 
-        # create the database directory if it doesn't exist
-        if not os.path.exists(self.path):
-            os.makedirs(self.path)
+        # if the database directory exists, load the collections, else create the directory
+        if os.path.exists(self.path):
+            for collection_name in os.listdir(self.path):
+                collection = Collection(collection_name, self)
+                self.collections.append(collection)
+        else:
+            if not os.path.exists(self.path):
+                os.makedirs(self.path)
 
     def __iter__(self):
         return iter(self.collections)
@@ -52,7 +57,7 @@ class Database:
 
         return collection
 
-    def get_collection(self, name: str):
+    def get_collection(self, name: str) -> Optional[Collection]:
         """
         Get a collection from the database.
 

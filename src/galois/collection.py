@@ -1,7 +1,8 @@
 import json
 import os
 import time
-from functools import lru_cache
+from typing import List
+from .query_language import parse, evaluate
 
 
 class Collection:
@@ -137,3 +138,26 @@ class Collection:
         # return the id as string
         # 4 bytes for time, 5 bytes for random, 3 bytes for counter
         return (current_time + os.urandom(5) + self.id_process_counter).hex()
+
+    def find(self, query: str) -> List[dict]:
+        """
+        Find documents in the collection that match the query.
+
+        Args:
+            query (str): The query to match documents against.
+
+        Returns:
+            List(dict): The documents that match the query.
+        """
+
+        # parse the query
+        query = parse(query)
+        results = []
+
+        for document in self.documents.values():
+            with open(document, "r") as file:
+                document = json.loads(file.read())
+                if evaluate(query, document):
+                    results.append(document)
+
+        return results

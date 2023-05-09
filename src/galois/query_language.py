@@ -38,14 +38,26 @@ def parse(query: str) -> Node:
             return Node(operator, children), index + 1
 
         else:
-            match = re.match(r"([a-zA-Z0-9]+)([<>=])([a-zA-Z0-9)]+)", token)
+            match = re.match(r"([a-zA-Z0-9]+)([<>=])([a-zA-Z0-9.)]+)", token)
             if match:
                 field, operator, value = match.groups()
                 if operator in comparison_operators:
+                    int_pattern = r"(-?\d+)"
+                    float_pattern = r"(-?\d+\.\d+)"
                     return (
                         Node(
                             operator,
-                            [Node("field", value=field), Node("value", value=value)],
+                            [
+                                Node("field", value=field),
+                                Node(
+                                    "value",
+                                    value=float(value)
+                                    if re.match(float_pattern, value)
+                                    else int(value)
+                                    if re.match(int_pattern, value)
+                                    else value,
+                                ),
+                            ],
                         ),
                         index + 1,
                     )
