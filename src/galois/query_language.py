@@ -38,7 +38,7 @@ def parse(query: str) -> Node:
             return Node(operator, children), index + 1
 
         else:
-            match = re.match(r"([a-zA-Z0-9]+)([<>=])([a-zA-Z0-9.)]+)", token)
+            match = re.match(r"(\w+)([<>=])(\w+|\d+|\d+\.\d+)", token)
             if match:
                 field, operator, value = match.groups()
                 if operator in comparison_operators:

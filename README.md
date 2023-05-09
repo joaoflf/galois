@@ -96,6 +96,25 @@ age>30
 
 ## 🤖 Benchmarks
 
+
+We used a dataset containing nearly 600k Spotify tracks to perform various benchmarks. This dataset can be found on [Kaggle](https://www.kaggle.com/datasets/yamaerenay/spotify-dataset-19212020-600k-tracks?select=tracks.csv).
+
+For simplicity, only the `artists`, `name`, `loudness`, `duration_ms`, `key`, and `tempo` columns were selected from the dataset.
+
+## Document Insertion
+
+**Task**: Create and write 586,672 documents to disk, including unique ID generation.
+
+**Time taken**: 95,291 ms
+
+## Querying
+
+**Task**: Perform the following query and return matching documents:
+```
+(AND (NOT duration_ms=120000) (OR tempo<120 key>4))
+```
+**Time taken**: 15,547 ms
+
 &nbsp;
 
 ## 🏈 Gameplan
@@ -106,5 +125,5 @@ age>30
 * Implement query language parser to an Abstract Syntax Tree (AST) ✅
     * Implemented a rudimentary parser based on regexes because the focus of the project is data management. In the future could use a context-free grammar parser like Bison
 * Implement the AST executor ✅
-* Perform some load benchmarks 🔁
-* Implement custom storage engine based on LSMTrees 📥
+* Perform some load benchmarks ✅
+* Implement custom storage engine based on LSMTrees 🔁
