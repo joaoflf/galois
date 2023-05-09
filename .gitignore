@@ -1,5 +1,5 @@
-# database folder
-database/
+# storage folder
+storage/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

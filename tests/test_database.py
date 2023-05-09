@@ -8,7 +8,7 @@ def test_database():
     db_name = "test_db"
     db = Database(db_name)
     yield db
-    shutil.rmtree(f"database/{db_name}")
+    shutil.rmtree(f"storage/{db_name}")
 
 
 def test_create_collection(test_database):
