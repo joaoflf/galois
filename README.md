@@ -22,7 +22,7 @@ A **simple document store** that can store, retrieve, and query JSON documents u
 
 ## 🎯 Features
 
-This project is part of the application of my learnings from chapters 2 and 3 of the  book [Designing Data-Intensive Applications](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/):
+This project is part of the application of my learnings from the book [Designing Data-Intensive Applications](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/):
 
 * Data store supporting collections of JSON documents
 * CRUD operations for collections and JSON documents
