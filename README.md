@@ -108,9 +108,9 @@ For simplicity, only the `artists`, `name`, `loudness`, `duration_ms`, `key`, an
 
 ### Document Insertion
 
-**Task**: Create and write 586,672 documents to disk, including unique ID generation.
+**Task**: Create and write **586,672** documents to disk, including unique ID generation.
 
-**Time taken**: 95,291 ms
+**Time taken**: **95,291ms**
 
 ### Querying
 
@@ -118,7 +118,7 @@ For simplicity, only the `artists`, `name`, `loudness`, `duration_ms`, `key`, an
 ```
 (AND (NOT duration_ms=120000) (OR tempo<120 key>4))
 ```
-**Time taken**: 15,547 ms
+**Time taken**: **15,547ms**
 
 &nbsp;
 
