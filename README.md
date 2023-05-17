@@ -106,13 +106,13 @@ We used a dataset containing nearly 600k Spotify tracks to perform various bench
 
 For simplicity, only the `artists`, `name`, `loudness`, `duration_ms`, `key`, and `tempo` columns were selected from the dataset.
 
-## Document Insertion
+### Document Insertion
 
 **Task**: Create and write 586,672 documents to disk, including unique ID generation.
 
 **Time taken**: 95,291 ms
 
-## Querying
+### Querying
 
 **Task**: Perform the following query and return matching documents:
 ```
