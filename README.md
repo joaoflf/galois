@@ -54,7 +54,7 @@ db = Database("music_library")
 tracks = db.get_collection("tracks")
 
 query = "(AND (NOT duration_ms=120000) (OR tempo<120 key>4))"
-db.get_collection("tracks").find(query)
+tracks.find(query)
 
 ```
 
