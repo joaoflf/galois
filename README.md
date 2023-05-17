@@ -48,7 +48,6 @@ pip install .
 
 ```python
 from galois.database import Database
-from galois.collection import Collection
 
 db = Database("music_library")
 tracks = db.get_collection("tracks")
