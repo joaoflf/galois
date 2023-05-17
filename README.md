@@ -28,7 +28,7 @@ This project is part of the application of my learnings from chapters 2 and 3 of
 * CRUD operations for collections and JSON documents
 * Custom query language to search and filter documents based on their properties
 * Custom storage engine based on LSM Trees **(Coming Soon)**
-* Data stored in a binary encoding similar to Avro
+* Data stored in a binary encoding similar to Avro **(Coming Soon)**
  
 &nbsp;
 
