@@ -26,8 +26,9 @@ This project is part of the application of my learnings from chapters 2 and 3 of
 
 * Data store supporting collections of JSON documents
 * CRUD operations for collections and JSON documents
-* Custom query language to search and filter documents based on their properties **(Coming Soon)**
-* Custom storage engine based on LSM Trees **(Coming Soon)**  
+* Custom query language to search and filter documents based on their properties
+* Custom storage engine based on LSM Trees **(Coming Soon)**
+* Data stored in a binary encoding similar to Avro
  
 &nbsp;
 
@@ -49,7 +50,12 @@ pip install .
 from galois.database import Database
 from galois.collection import Collection
 
-# more to come
+db = Database("music_library")
+tracks = db.get_collection("tracks")
+
+query = "(AND (NOT duration_ms=120000) (OR tempo<120 key>4))"
+db.get_collection("tracks").find(query)
+
 ```
 
 &nbsp;
@@ -127,3 +133,5 @@ For simplicity, only the `artists`, `name`, `loudness`, `duration_ms`, `key`, an
 * Implement the AST executor ✅
 * Perform some load benchmarks ✅
 * Implement custom storage engine based on LSMTrees 🔁
+* Implement a rough version of the Avro binary encoding 📥
+* Have Galois use this Avro encoding 📥
