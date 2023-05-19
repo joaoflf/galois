@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Galois Logo" src="./assets/galois.png" alt="Logo" width="400">
+    <img alt="Galois Logo" src="./assets/galois.png" alt="Logo" height="250">
 </div>
 <div align="center">
     <img alt="python badge" src="https://img.shields.io/badge/python-3.10-blue.svg">
