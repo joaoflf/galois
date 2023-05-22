@@ -2,7 +2,7 @@ import json
 import os
 import time
 from typing import List
-from .query_language import parse, evaluate
+from galois.query_language import parse, evaluate
 
 
 class Collection:
@@ -16,6 +16,7 @@ class Collection:
 
     def __init__(self, name: str, database):
         self.name = name
+        self.db = database
         self.path = f"{database.path}/{name}"
 
         # create the collection directory if it doesn't exist
@@ -56,14 +57,13 @@ class Collection:
         Returns:
             dict: The document.
         """
-
-        if document_id not in self.documents:
+        # [TODO] check with bloom filter and then in sstables, move logic to storage engine
+        if self.db.storage_engine.get(document_id) is None:
             raise Exception(f"Document with id '{document_id}' does not exist.")
 
-        with open(self.documents[document_id], "r") as file:
-            return json.loads(file.read())
+        return self.db.storage_engine.get(document_id)
 
-    def _insert_document(self, document: dict):
+    def _insert_document(self, document: dict) -> str:
         """
         Insert a document into the collection and write it to the filesystem.
         generate a unique id for the document.
@@ -75,10 +75,13 @@ class Collection:
         document_id = self._generate_document_id()
         document["_id"] = document_id
 
-        with open(f"{self.path}/{document_id}.json", "w") as file:
-            file.write(json.dumps(document))
+        # [TODO] check with bloom filter and then in sstables, move logic to storage engine
+        if self.db.storage_engine.get(document_id) is not None:
+            raise Exception(f"Document with id '{document_id}' already exists.")
 
-        self.documents[document_id] = f"{self.path}/{document_id}.json"
+        self.db.storage_engine.put(document_id, document)
+
+        return document_id
 
     def _update_document(self, document_id: str, new_document: dict):
         """
@@ -90,12 +93,12 @@ class Collection:
             new_document (dict): The new document to replace the old one with.
         """
 
-        if document_id not in self.documents:
+        # [TODO] check with bloom filter and then in sstables, move logic to storage engine
+        if self.db.storage_engine.get(document_id) is None:
             raise Exception(f"Document with id '{document_id}' does not exist.")
 
         new_document["_id"] = document_id
-        with open(self.documents[document_id], "w+") as file:
-            file.write(json.dumps(new_document))
+        self.db.storage_engine.put(document_id, new_document)
 
     def _delete_document(self, document_id: str):
         """
@@ -106,7 +109,8 @@ class Collection:
             document_id (str): The id of the document to delete.
         """
 
-        if document_id not in self.documents:
+        # [TODO] check with bloom filter and then in sstables, move logic to storage engine
+        if self.db.storage_engine.get(document_id) is None:
             raise Exception(f"Document with id '{document_id}' does not exist.")
 
         os.remove(self.documents[document_id])

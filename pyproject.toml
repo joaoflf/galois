@@ -8,6 +8,7 @@ authors = [{ name = "João Fernandes", email = "fernandesj@proton.me" }]
 description = "A simple document store"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = ["sortedcontainers>=2.4.0"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -17,6 +18,7 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/joaoflf/galois"
 "Bug Tracker" = "https://github.com/joaoflf/galois/issues"
+
 
 [project.optional-dependencies]
 test = ["pytest"]
