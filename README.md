@@ -1,6 +1,6 @@
 &nbsp;
 <div align="center">
-    <img alt="Galois Logo" src="./assets/galois.png" alt="Logo" height="250">
+    <img alt="Galois Logo" src="./assets/galois2.png" alt="Logo" height="250">
 </div>
 &nbsp;
 <div align="center">
