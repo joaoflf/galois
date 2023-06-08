@@ -1,7 +1,8 @@
 import os
 from typing import Optional
+
 from galois.collection import Collection
-from galois.storage_engine import StorageEngine
+from galois.lsmtree import LSMTree
 
 
 class Database:
@@ -16,7 +17,7 @@ class Database:
         self.name = name
         self.path = f"storage/{name}"
         self.collections = []
-        self.storage_engine = StorageEngine()
+        self.storage_engine = LSMTree()
 
         # if the database directory exists, load the collections, else create the directory
         if os.path.exists(self.path):

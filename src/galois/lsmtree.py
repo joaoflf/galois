@@ -1,7 +1,7 @@
 import sortedcontainers
 
 
-class StorageEngine:
+class LSMTree:
     def __init__(self):
         self._memtable = sortedcontainers.SortedDict()
 
