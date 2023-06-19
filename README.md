@@ -29,8 +29,6 @@ This project is part of the application of my learnings from the book [Designing
 * Data store supporting collections of JSON documents
 * CRUD operations for collections and JSON documents
 * Custom query language to search and filter documents based on their properties
-* Custom storage engine based on LSM Trees **(Coming Soon)**
-* Data stored in a binary encoding similar to Avro **(Coming Soon)**
  
 &nbsp;
 
@@ -133,6 +131,3 @@ For simplicity, only the `artists`, `name`, `loudness`, `duration_ms`, `key`, an
     * Implemented a rudimentary parser based on regexes because the focus of the project is data management. In the future could use a context-free grammar parser like Bison
 * Implement the AST executor ✅
 * Perform some load benchmarks ✅
-* Implement custom storage engine based on LSMTrees 🔁
-* Implement a rough version of the Avro binary encoding 📥
-* Have Galois use this Avro encoding 📥
